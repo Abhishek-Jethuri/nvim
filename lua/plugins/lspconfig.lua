@@ -61,6 +61,10 @@ return {
       tsserver = function(_, opts)
         require("typescript").setup({ server = opts })
         return true
+      clangd = function(_, opts)
+        local clangd_ext_opts = LazyVim.opts("clangd_extensions.nvim")
+        require("clangd_extensions").setup(vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts }))
+        return false
       end,
       -- Specify * to use this function as a fallback for any server
       -- ["*"] = function(server, opts) end,
